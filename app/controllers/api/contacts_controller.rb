@@ -26,11 +26,20 @@ class Api::ContactsController < ApplicationController
     the_id = params[:id]
     @contact = Contact.find_by(id: params[:id])
     # change the contact
-    @contact.first_name = params[:first_name],
-    @contact.last_name = params[:last_name],
+    @contact.first_name = params[:first_name]
+    @contact.last_name = params[:last_name]
     @contact.phone_number = params[:phone_number]
     @contact.save
     render 'show.json.jb'
+  end
+
+  def destroy
+    # find the contact
+    the_id = params[:id]
+    contact = Contact.find_by(id: the_id)
+    # destroy the contact
+    contact.destroy
+    render "destroy.json.jb"
   end
 
 end
